@@ -140,6 +140,7 @@ func UpdateMenu() gin.HandlerFunc {
 			},
 			&opt,
 		)
+		defer cancel()
 
 		if err != nil {
 			msg := "Menu update failed"
@@ -152,6 +153,6 @@ func UpdateMenu() gin.HandlerFunc {
 	}
 }
 
-func inTimeSpan(time.Time, time.Time, time.Time) bool {
-	return true
+func inTimeSpan(start, end, check time.Time) bool {
+	return start.After(check) && end.After(start)
 }
